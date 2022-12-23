@@ -18,7 +18,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/axios', '~/plugins/repository'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -27,12 +27,19 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
-    'nuxt-vite',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ['@nuxtjs/axios'],
+
+  axios: {
+    baseURL: 'https://rdtest.ml/api/',
+    credentials: true,
+    proxyHeaders: false,
+    init(axios) {
+      axios.defaults.withCredentials = true
+    },
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
 }
